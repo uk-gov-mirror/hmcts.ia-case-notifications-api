@@ -41,12 +41,6 @@ public class PreSubmitCallbackControllerTest {
     @Test
     public void should_deserialize_about_to_start_callback_then_dispatch_then_return_response() {
 
-        String asylumCaseCallbackSource = "{\"case\":\"data\"}";
-
-        doReturn(callback)
-            .when(callbackDeserializer)
-            .deserialize(asylumCaseCallbackSource);
-
         when(callback.getCaseDetails()).thenReturn(caseDetails);
 
         doReturn(callbackResponse)
@@ -54,7 +48,7 @@ public class PreSubmitCallbackControllerTest {
             .handle(PreSubmitCallbackStage.ABOUT_TO_START, callback);
 
         ResponseEntity<PreSubmitCallbackResponse<AsylumCase>> actualResponse =
-            preSubmitCallbackController.ccdAboutToStart(asylumCaseCallbackSource);
+            preSubmitCallbackController.ccdAboutToStart(callback);
 
         assertNotNull(actualResponse);
 
@@ -67,12 +61,6 @@ public class PreSubmitCallbackControllerTest {
     @Test
     public void should_deserialize_about_to_submit_callback_then_dispatch_then_return_response() {
 
-        String asylumCaseCallbackSource = "{\"case\":\"data\"}";
-
-        doReturn(callback)
-            .when(callbackDeserializer)
-            .deserialize(asylumCaseCallbackSource);
-
         when(callback.getCaseDetails()).thenReturn(caseDetails);
 
         doReturn(callbackResponse)
@@ -80,7 +68,7 @@ public class PreSubmitCallbackControllerTest {
             .handle(PreSubmitCallbackStage.ABOUT_TO_SUBMIT, callback);
 
         ResponseEntity<PreSubmitCallbackResponse<AsylumCase>> actualResponse =
-            preSubmitCallbackController.ccdAboutToSubmit(asylumCaseCallbackSource);
+            preSubmitCallbackController.ccdAboutToSubmit(callback);
 
         assertNotNull(actualResponse);
 
